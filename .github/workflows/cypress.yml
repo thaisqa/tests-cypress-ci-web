@@ -22,7 +22,7 @@ jobs:
 
       - name: Upload test reports # Passo 4: (Opcional) Faz upload dos relatórios de teste como artefato
         if: always() # Sempre executa, mesmo se algum passo anterior falhar
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: cypress-reports # Nome do artefato
           path: cypress/reports # Caminho dos relatórios gerados
