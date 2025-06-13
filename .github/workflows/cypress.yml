@@ -1,15 +1,28 @@
-name: Cypress Tests 
+name: Cypress Tests with Docker
 
-on: [push, pull_request] # Executa em push ou pull request
+on: # Define quando o workflow será executado
+  push: # Ao fazer push
+    branches: [main] # Apenas na branch main
+  pull_request: # Ou ao abrir pull request
+    branches: [main] # Apenas na branch main
 
 jobs:
-  cypress-run:
-    runs-on: ubuntu-latest # Usa runner Ubuntu
+  cypress-docker: # Nome do job
+    runs-on: ubuntu-latest # Runner do GitHub (máquina virtual Ubuntu)
+
     steps:
-      - uses: actions/checkout@v3 # Faz checkout do código
-      - name: Use Node.js
-        uses: actions/setup-node@v3 # Instala Node.js
+      - name: Checkout code # Passo 1: Faz checkout do código do repositório
+        uses: actions/checkout@v3
+
+      - name: Build Docker image # Passo 2: Builda a imagem Docker do projeto
+        run: docker build -t cypress-tests .
+
+      - name: Run Cypress tests in Docker # Passo 3: Executa os testes dentro do container Docker
+        run: docker run --rm cypress-tests
+
+      - name: Upload test reports # Passo 4: (Opcional) Faz upload dos relatórios de teste como artefato
+        if: always() # Sempre executa, mesmo se algum passo anterior falhar
+        uses: actions/upload-artifact@v3
         with:
-          node-version: '18' # Versão do Node.js
-      - run: npm ci # Instala dependências
-      - run: npx cypress run # Executa testes Cypress
+          name: cypress-reports # Nome do artefato
+          path: cypress/reports # Caminho dos relatórios gerados
