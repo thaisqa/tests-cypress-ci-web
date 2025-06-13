@@ -1,0 +1,15 @@
+name: Cypress Tests 
+
+on: [push, pull_request] # Executa em push ou pull request
+
+jobs:
+  cypress-run:
+    runs-on: ubuntu-latest # Usa runner Ubuntu
+    steps:
+      - uses: actions/checkout@v3 # Faz checkout do código
+      - name: Use Node.js
+        uses: actions/setup-node@v3 # Instala Node.js
+        with:
+          node-version: '18' # Versão do Node.js
+      - run: npm ci # Instala dependências
+      - run: npx cypress run # Executa testes Cypress

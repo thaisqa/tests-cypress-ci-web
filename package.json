@@ -1,0 +1,16 @@
+{
+    "name": "tests-cucumber-ci-web",
+    "version": "1.0.0",
+    "description": "Projeto de testes automatizados usando Cypress, Cucumber e Page Objects",
+    "scripts": {
+        "test": "cypress run",
+        "cy:open": "cypress open"
+    },
+    "devDependencies": {
+        "@badeball/cypress-cucumber-preprocessor": "^17.0.0",
+        "@bahmutov/cypress-esbuild-preprocessor": "^2.1.5",
+        "cypress": "^12.17.4",
+        "cypress-mochawesome-reporter": "^3.8.2",
+        "esbuild": "^0.19.0"
+    }
+}

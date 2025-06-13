@@ -1,0 +1,10 @@
+# Ignora a pasta node_modules (dependências do Node.js)
+node_modules/
+
+# Outros arquivos comuns a ignorar
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.env
+.DS_Storenode_modules
